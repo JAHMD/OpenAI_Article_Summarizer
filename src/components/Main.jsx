@@ -48,7 +48,7 @@ const Main = () => {
 				setAllArticles(updatedArticles);
 				localStorage.setItem("articles", JSON.stringify(updatedArticles));
 			} else {
-				setError(data?.error);
+				setError(data?.error || data.message);
 			}
 		} catch (err) {
 			setError(err.message);
