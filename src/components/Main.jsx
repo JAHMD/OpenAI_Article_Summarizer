@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { copy, linkIcon, loader, tick } from "../assets";
 
 const BASE_URL = "https://article-extractor-and-summarizer.p.rapidapi.com/";
@@ -10,6 +10,7 @@ const Main = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [isCopied, setIsCopied] = useState("");
+	const inputRef = useRef(null);
 	const options = useMemo(() => {
 		return {
 			method: "GET",
@@ -21,9 +22,12 @@ const Main = () => {
 	}, []);
 
 	useEffect(() => {
+		setTimeout(() => {
+			inputRef.current.focus();
+		});
 		const articles = JSON.parse(localStorage.getItem("articles")) || [];
 		setAllArticles(articles);
-	}, []);
+	}, [inputRef]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -31,7 +35,6 @@ const Main = () => {
 		const URL = `${BASE_URL}summarize?url=${encodeURIComponent(
 			article.url
 		)}&length=3`;
-
 		const res = await fetch(URL, options);
 		const data = await res.json();
 		if (data?.summary && res.ok) {
@@ -79,6 +82,7 @@ const Main = () => {
 							className="absolute top-1/2 left-2  -translate-y-1/2"
 						/>
 						<input
+							ref={inputRef}
 							type="url"
 							value={article.url}
 							onChange={(e) => setArticle({ ...article, url: e.target.value })}
