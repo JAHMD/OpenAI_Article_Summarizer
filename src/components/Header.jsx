@@ -10,7 +10,7 @@ const Header = () => {
 					className="black_btn"
 					onClick={() =>
 						window.open(
-							"https://jahmd.github.io/OpenAI_Article_Summarizer/",
+							"https://github.com/JAHMD/OpenAI_Article_Summarizer",
 							"_blank"
 						)
 					}
