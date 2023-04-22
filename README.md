@@ -13,7 +13,7 @@
 
 ### Screenshot
 
-![Design preview](./src/assets/images/Screenshot%202023-04-22%20173211.png)
+![Design preview](./src/assets/images/design.png)
 
 ## links
 
