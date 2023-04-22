@@ -71,7 +71,7 @@ const Main = () => {
 				that transforms lengthy articles into clear and concise summaries
 			</p>
 			<section className="mt-16 w-full max-w-xl mx-auto">
-				<div className="flex flex-col w-full gap-2 mb-20">
+				<div className="flex flex-col w-full gap-4">
 					<form
 						className="relative flex justify-center items-center"
 						onSubmit={handleSubmit}
@@ -122,9 +122,8 @@ const Main = () => {
 							</div>
 						))}
 					</div>
-
 					{/* summary */}
-					<div className="my-10 max-w-full flex justify-center items-center flex-col">
+					<div className="my-8 max-w-full flex justify-center items-center flex-col">
 						{isLoading ? (
 							<img
 								src={loader}
