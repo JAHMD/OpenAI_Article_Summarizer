@@ -35,19 +35,23 @@ const Main = () => {
 		const URL = `${BASE_URL}summarize?url=${encodeURIComponent(
 			article.url
 		)}&length=3`;
-		const res = await fetch(URL, options);
-		const data = await res.json();
-		if (data?.summary && res.ok) {
-			const newArticle = {
-				url: article.url,
-				summary: data.summary,
-			};
-			const updatedArticles = [newArticle, ...allArticles].slice(0, 5);
-			setArticle({ ...newArticle, url: "" });
-			setAllArticles(updatedArticles);
-			localStorage.setItem("articles", JSON.stringify(updatedArticles));
-		} else {
-			setError(data?.error);
+		try {
+			const res = await fetch(URL, options);
+			const data = await res.json();
+			if (data?.summary && res.ok) {
+				const newArticle = {
+					url: article.url,
+					summary: data.summary,
+				};
+				const updatedArticles = [newArticle, ...allArticles].slice(0, 5);
+				setArticle({ ...newArticle, url: "" });
+				setAllArticles(updatedArticles);
+				localStorage.setItem("articles", JSON.stringify(updatedArticles));
+			} else {
+				setError(data?.error);
+			}
+		} catch (err) {
+			setError(err.message);
 		}
 		setIsLoading(false);
 	};
